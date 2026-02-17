@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -13,12 +14,12 @@ export default function Home() {
           Personalized workouts, diet plans, and an AI coach to guide our users.
         </p>
 
-        <a
-          href="/signup"
-          className="px-6 py-3 bg-pink-600 text-white rounded-lg shadow hover:bg-pink-700"
+        <Link
+          to="/signup"
+          className="px-6 py-3 bg-pink-600 text-white rounded-lg shadow hover:bg-pink-700 inline-block"
         >
           Get Started
-        </a>
+        </Link>
       </div>
 
       <Footer />
