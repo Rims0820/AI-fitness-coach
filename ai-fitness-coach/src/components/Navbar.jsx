@@ -7,11 +7,11 @@ export default function Navbar(){
             <h1 className="text-xl font-bold text-blue-600">AI Fitness Coach</h1>
             <div className="flex gap-4">
                 <Link to="/" className="hover:text-blue-600">Home</Link>
-                <Link to="/dashboard" className="hover:text-blue-600">Dashboard</Link>
-                <Link to="/dashboard" className="hover:text-blue-600">Dashboard</Link>
-                <Link to="/chatcoach" className="hover:text-blue-600">AI Coach</Link>
-                <Link to="/login" className="hover:text-blue-600">Login</Link>
-                <Link to="/signup" className="hover:text-blue-600">Signup</Link>
+                <Link to="/dashboard" className="hover:text-pink-600">Dashboard</Link>
+                <Link to="/dashboard" className="hover:text-pink-600">Dashboard</Link>
+                <Link to="/chatcoach" className="hover:text-pink-600">AI Coach</Link>
+                <Link to="/login" className="hover:text-pink-600">Login</Link>
+                <Link to="/signup" className="hover:text-pink-600">Signup</Link>
             </div>
         </nav>
     );
