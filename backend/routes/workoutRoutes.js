@@ -1,14 +1,34 @@
 const express = require("express");
 const router = express.Router();
-const {
-  createWorkout,
-  getWorkouts,
-  deleteWorkout,
-} = require("../controllers/workoutController");
-const { protect } = require("../middleware/authMiddleware");
+const Workout = require("../models/Workout");
+const auth = require("../middleware/auth");
 
-router.post("/", protect, createWorkout);
-router.get("/", protect, getWorkouts);
-router.delete("/:id", protect, deleteWorkout);
+// Get workouts
+router.get("/", auth, async (req, res) => {
+  const workouts = await Workout.find({ user: req.user });
+  res.json(workouts);
+});
+
+// Add workout
+router.post("/", auth, async (req, res) => {
+  const { name, reps, sets, difficulty } = req.body;
+
+  const workout = new Workout({
+    user: req.user,
+    name,
+    reps,
+    sets,
+    difficulty,
+  });
+
+  await workout.save();
+  res.json(workout);
+});
+
+// Delete workout
+router.delete("/:id", auth, async (req, res) => {
+  await Workout.findByIdAndDelete(req.params.id);
+  res.json({ message: "Workout deleted" });
+});
 
 module.exports = router;
