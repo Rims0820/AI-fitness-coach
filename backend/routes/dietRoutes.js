@@ -1,20 +1,20 @@
 const express = require("express");
 const router = express.Router();
 const Diet = require("../models/Diet");
-const auth = require("../middleware/auth");
+const { protect } = require("../middleware/authMiddleware");
 
 // Get diet
-router.get("/", auth, async (req, res) => {
-  const diet = await Diet.find({ user: req.user });
+router.get("/", protect, async (req, res) => {
+  const diet = await Diet.find({ user: req.user._id });
   res.json(diet);
 });
 
 
-router.post("/", auth, async (req, res) => {
+router.post("/", protect, async (req, res) => {
   const { name, calories, protein, carbs } = req.body;
 
   const meal = new Diet({
-    user: req.user,
+    user: req.user._id,
     name,
     calories,
     protein,
@@ -26,7 +26,7 @@ router.post("/", auth, async (req, res) => {
 });
 
 
-router.delete("/:id", auth, async (req, res) => {
+router.delete("/:id", protect, async (req, res) => {
   await Diet.findByIdAndDelete(req.params.id);
   res.json({ message: "Diet deleted" });
 });

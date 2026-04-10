@@ -10,7 +10,7 @@ const AddWorkout = () => {
   const handleAddWorkout = async () => {
     const token = localStorage.getItem("token");
 
-    await fetch("http://localhost:5000/api/workouts", {
+    const res = await fetch("http://localhost:5000/api/workouts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -18,13 +18,20 @@ const AddWorkout = () => {
       },
       body: JSON.stringify({
         name,
-        reps,
-        sets,
+        reps: parseInt(reps),
+        sets: parseInt(sets),
         difficulty,
       }),
     });
 
-    alert("Workout Added");
+    const data = await res.json();
+
+    if (res.ok) {
+      alert("Workout Added");
+      window.location.href = "/dashboard";
+    } else {
+      alert(data.message || "Failed to add workout");
+    }
   };
 
   return (

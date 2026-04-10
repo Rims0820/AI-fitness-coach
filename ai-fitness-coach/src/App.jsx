@@ -5,6 +5,7 @@ import Dashboard from './pages/Dashboard'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import ChatCoach from './pages/ChatCoach'
+import AddWorkout from './pages/AddWorkout'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/chat" element={<ChatCoach />} />
+        <Route path="/add-workout" element={<AddWorkout />} />
       </Routes>
     </Router>
   )

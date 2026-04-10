@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const Progress = require("../models/Progress");
-const auth = require("../middleware/auth");
+const { protect } = require("../middleware/authMiddleware");
 
 // Add progress
-router.post("/", auth, async (req, res) => {
+router.post("/", protect, async (req, res) => {
   const progress = new Progress({
-    user: req.user,
+    user: req.user._id,
     weight: req.body.weight,
     calories: req.body.calories,
     steps: req.body.steps,
@@ -17,8 +17,8 @@ router.post("/", auth, async (req, res) => {
 });
 
 // Get progress
-router.get("/", auth, async (req, res) => {
-  const progress = await Progress.find({ user: req.user });
+router.get("/", protect, async (req, res) => {
+  const progress = await Progress.find({ user: req.user._id });
   res.json(progress);
 });
 

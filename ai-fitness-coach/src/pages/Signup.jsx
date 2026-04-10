@@ -26,7 +26,7 @@ const Signup = () => {
         alert("Signup successful");
         window.location.href = "/login";
       } else {
-        alert("Signup failed");
+        alert(data.message || "Signup failed");
       }
     } catch (error) {
       console.log(error);

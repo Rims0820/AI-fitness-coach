@@ -1,19 +1,19 @@
 const express = require("express");
 const router = express.Router();
 const Workout = require("../models/Workout");
-const auth = require("../middleware/auth");
+const { protect } = require("../middleware/authMiddleware");
 
 
-router.get("/", auth, async (req, res) => {
-  const workouts = await Workout.find({ user: req.user });
+router.get("/", protect, async (req, res) => {
+  const workouts = await Workout.find({ user: req.user._id });
   res.json(workouts);
 });
 
-router.post("/", auth, async (req, res) => {
+router.post("/", protect, async (req, res) => {
   const { name, reps, sets, difficulty } = req.body;
 
   const workout = new Workout({
-    user: req.user,
+    user: req.user._id,
     name,
     reps,
     sets,
@@ -25,7 +25,7 @@ router.post("/", auth, async (req, res) => {
 });
 
 
-router.delete("/:id", auth, async (req, res) => {
+router.delete("/:id", protect, async (req, res) => {
   await Workout.findByIdAndDelete(req.params.id);
   res.json({ message: "Workout deleted" });
 });

@@ -25,7 +25,7 @@ const Login = () => {
         alert("Login successful");
         window.location.href = "/dashboard";
       } else {
-        alert("Invalid credentials");
+        alert(data.message || "Invalid credentials");
       }
     } catch (error) {
       console.log(error);
