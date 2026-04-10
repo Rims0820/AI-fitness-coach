@@ -8,8 +8,8 @@ const ChatCoach = () => {
   const sendMessage = async () => {
     if (!input) return;
 
-    const userMessage = { role: "user", text: input };
-    setMessages([...messages, userMessage]);
+    const userMsg = { role: "user", text: input };
+    setMessages((prev) => [...prev, userMsg]);
     setInput("");
 
     const res = await fetch("http://localhost:5000/api/ai/chat", {
@@ -22,48 +22,53 @@ const ChatCoach = () => {
 
     const data = await res.json();
 
-    const aiReply = {
-      role: "assistant",
-      text: data.reply,
-    };
-
-    setMessages((prev) => [...prev, aiReply]);
+    const aiMsg = { role: "assistant", text: data.reply };
+    setMessages((prev) => [...prev, aiMsg]);
   };
 
   return (
-    <>
+    <div className="min-h-screen bg-gradient-to-br from-blue-100 via-white to-purple-100">
       <Navbar />
-      <div className="p-10">
-        <div className="bg-gray-100 h-96 p-5 overflow-y-auto mb-4 rounded-xl">
-          {messages.map((msg, index) => (
+
+      <div className="max-w-3xl mx-auto p-6">
+        <div className="bg-white h-96 p-4 rounded-2xl shadow overflow-y-auto mb-4">
+          {messages.map((msg, i) => (
             <div
-              key={index}
-              className={`mb-2 ${
-                msg.role === "user" ? "text-right" : "text-left"
+              key={i}
+              className={`mb-3 flex ${
+                msg.role === "user" ? "justify-end" : "justify-start"
               }`}
             >
-              <span className="bg-blue-500 text-white px-3 py-1 rounded-lg">
+              <div
+                className={`px-4 py-2 rounded-xl max-w-xs ${
+                  msg.role === "user"
+                    ? "bg-blue-600 text-white"
+                    : "bg-gray-200 text-gray-800"
+                }`}
+              >
                 {msg.text}
-              </span>
+              </div>
             </div>
           ))}
         </div>
 
-        <div className="flex">
+        <div className="flex gap-2">
           <input
-            className="border flex-1 p-2"
+            className="flex-1 border rounded-xl p-2"
             value={input}
             onChange={(e) => setInput(e.target.value)}
+            placeholder="Ask your AI coach..."
           />
+
           <button
             onClick={sendMessage}
-            className="bg-blue-600 text-white px-4"
+            className="bg-blue-600 text-white px-5 rounded-xl"
           >
             Send
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

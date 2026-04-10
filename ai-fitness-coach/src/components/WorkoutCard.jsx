@@ -1,11 +1,22 @@
+import { motion } from "framer-motion";
+
 const WorkoutCard = ({ workout }) => {
   return (
-    <div className="bg-white shadow-lg p-5 rounded-xl">
-      <h2 className="text-xl font-bold">{workout.name}</h2>
-      <p>Reps: {workout.reps}</p>
-      <p>Sets: {workout.sets}</p>
-      <p>Difficulty: {workout.difficulty}</p>
-    </div>
+    <motion.div
+      whileHover={{ scale: 1.05 }}
+      className="bg-white p-5 rounded-2xl shadow-md hover:shadow-xl transition"
+    >
+      <h2 className="text-xl font-bold text-blue-600 mb-2">
+        {workout.name}
+      </h2>
+
+      <p className="text-gray-600">Sets: {workout.sets}</p>
+      <p className="text-gray-600">Reps: {workout.reps}</p>
+
+      <span className="inline-block mt-3 text-sm bg-blue-100 text-blue-600 px-3 py-1 rounded-full">
+        {workout.difficulty}
+      </span>
+    </motion.div>
   );
 };
 

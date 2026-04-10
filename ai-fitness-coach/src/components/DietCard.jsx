@@ -1,6 +1,7 @@
 import Navbar from "../components/Navbar";
 import DietCard from "../components/DietCard";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 const Diet = () => {
   const [diets, setDiets] = useState([]);
@@ -24,12 +25,18 @@ const Diet = () => {
     };
     const DietCard = ({ meal }) => {
   return (
-    <div className="bg-white shadow-lg p-5 rounded-xl">
-      <h2 className="text-xl font-bold">{meal.name}</h2>
-      <p>Calories: {meal.calories}</p>
-      <p>Protein: {meal.protein}g</p>
-      <p>Carbs: {meal.carbs}g</p>
-    </div>
+        <motion.div
+      whileHover={{ scale: 1.05 }}
+      className="bg-white p-5 rounded-2xl shadow-md hover:shadow-xl transition"
+    >
+      <h2 className="text-xl font-bold text-green-600 mb-2">
+        {meal.name}
+      </h2>
+
+      <p className="text-gray-600">Calories: {meal.calories}</p>
+      <p className="text-gray-600">Protein: {meal.protein}g</p>
+      <p className="text-gray-600">Carbs: {meal.carbs}g</p>
+    </motion.div>
   );
 };
 
