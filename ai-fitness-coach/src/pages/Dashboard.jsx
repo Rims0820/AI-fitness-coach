@@ -2,6 +2,7 @@ import Navbar from "../components/Navbar";
 import WorkoutCard from "../components/WorkoutCard";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { API_BASE_URL } from "../config";
 
 const Dashboard = () => {
   const [workouts, setWorkouts] = useState([]);
@@ -10,7 +11,7 @@ const Dashboard = () => {
     const fetchWorkouts = async () => {
       const token = localStorage.getItem("token");
 
-      const res = await fetch("http://localhost:5000/api/workouts", {
+      const res = await fetch(`${API_BASE_URL}/api/workouts`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
+import { API_BASE_URL } from "../config";
 
 const Progress = () => {
   const [progress, setProgress] = useState([]);
@@ -10,7 +11,7 @@ const Progress = () => {
   const token = localStorage.getItem("token");
 
   const addProgress = async () => {
-    await fetch("http://localhost:5000/api/progress", {
+    await fetch(`${API_BASE_URL}/api/progress`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -22,7 +23,7 @@ const Progress = () => {
 
   useEffect(() => {
     const fetchProgress = async () => {
-      const res = await fetch("http://localhost:5000/api/progress", {
+      const res = await fetch(`${API_BASE_URL}/api/progress`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

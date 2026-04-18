@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar";
+import { API_BASE_URL } from "../config";
 
 const ChatCoach = () => {
   const [messages, setMessages] = useState([]);
@@ -12,7 +13,7 @@ const ChatCoach = () => {
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
 
-    const res = await fetch("http://localhost:5000/api/ai/chat", {
+    const res = await fetch(`${API_BASE_URL}/api/ai/chat`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
