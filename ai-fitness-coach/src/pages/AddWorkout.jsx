@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar";
+import { API_BASE_URL } from "../config";
 
 const AddWorkout = () => {
   const [name, setName] = useState("");
@@ -10,7 +11,7 @@ const AddWorkout = () => {
   const handleAddWorkout = async () => {
     const token = localStorage.getItem("token");
 
-    const res = await fetch("http://localhost:5000/api/workouts", {
+    const res = await fetch(`${API_BASE_URL}/api/workouts`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
